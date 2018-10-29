@@ -32,6 +32,7 @@ export default {
     }
   },
   mounted () {
+    let L;
     this.map = L.map('map');
     this.map .setView([-23.31455,-51.17181], 14);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -44,41 +45,17 @@ export default {
       if(newMarker)
         self.map.removeLayer(newMarker);
       newMarker = L.marker(e.latlng).addTo(self.map);
-      console.log("antes    "+self.marker);
       self.marker = newMarker;
-      console.log(self.marker);
     });
     axios
       .get('https://spreadsheets.google.com/feeds/list/1bFy086G8dGg6tzK4fNyI8I6LKXWuc9gjXlXNXxJDRdY/od6/public/basic?alt=json')
       .then(response => {
         self.points = (response.data.feed.entry.map((item) => {
           let mark = item.content["$t"].replace(/\w+:/g, "").split(',');
-          console.log([Number(mark[0]), Number(mark[1])]);
-          let marker = L.marker([Number(mark[0]), Number(mark[1])]).addTo(self.map).bindPopup(mark[2]);
+          let marker = L.marker([Number(mark[0]), Number(mark[1])]).addTo(self.map).bindPopup("<h1>"+mark[2]+"</h1>"+mark[3]);
           return mark;
         }));
       });
-
-    // axios
-    //   .get('http://ciburbem.firebaseapp.com/trees')
-    //   .then(response => {
-    //     let trees = response.data;
-    //
-    //     for(let id in trees){
-    //       let tree = trees[id];
-    //       var greenIcon = L.icon({
-    //           iconUrl: 'icon.png',
-    //
-    //           iconSize:     [64, 64], // size of the icon
-    //           iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-    //           shadowAnchor: [4, 62],  // the same for the shadow
-    //           popupAnchor:  [13, -76] // point from which the popup should open relative to the iconAnchor
-    //       });
-    //       L.marker([tree.lat, tree.lng], {icon: greenIcon}).addTo(mymap).bindPopup("<p>"+tree.mainTag+"</p>"+tree.description);
-    //     }
-    //   }).catch(error => {
-    //     console.log(error);
-    //   })
   },
   computed: {
     lat: {
@@ -101,13 +78,6 @@ export default {
     },
   },
   methods: {
-    save: function (event) {
-      console.log("OI MUNDO");
-      console.log("depois:"+this.marker+this.mainTag+this.description);
-      // const provider = new OpenStreetMapProvider();
-      // const results = await provider.search({ query: this.$data.address });
-      // console.log(results);
-    }
   }
 }
 </script>

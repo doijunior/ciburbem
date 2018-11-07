@@ -1,8 +1,6 @@
 <template>
   <div class="hello">
     <div v-if="marker">
-      Latitude: {{this.lat}},
-      Longitude: {{this.lng}}
       <label>Árvore:</label>
       <input type='text' v-model='mainTag'/>
       <label>Descrição complementar:</label>
@@ -15,7 +13,7 @@
 
 <script>
 import axios from 'axios';
-import leaflet from 'leaflet';
+import L from 'leaflet';
 
 export default {
   name: 'HelloWorld',
@@ -32,7 +30,6 @@ export default {
     }
   },
   mounted () {
-    let L;
     this.map = L.map('map');
     this.map .setView([-23.31455,-51.17181], 14);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -44,7 +41,12 @@ export default {
     this.map.on('click', function(e) {
       if(newMarker)
         self.map.removeLayer(newMarker);
-      newMarker = L.marker(e.latlng).addTo(self.map);
+        var myIcon = L.icon({
+          iconUrl: './marker-icon-green.png',
+          iconSize: [25, 41],
+          iconAnchor: [25, 41],
+        });
+        newMarker = L.marker(e.latlng, {icon: myIcon}).addTo(self.map);
       self.marker = newMarker;
     });
     axios
@@ -78,6 +80,9 @@ export default {
     },
   },
   methods: {
+    save: function(){
+
+    }
   }
 }
 </script>

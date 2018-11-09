@@ -3,8 +3,9 @@
     <v-toolbar app>Ciburbem Londrina</v-toolbar>
     <v-content>
       <v-container fluid>
-          <HomeForm/>
+          <HomeForm :treeOptions="treeOptions"/>
           <HomeMap/>
+          <!-- {{treeIo}} -->
       </v-container>
     </v-content>
     <v-footer app></v-footer>
@@ -21,13 +22,29 @@ export default {
     HomeForm,
     HomeMap
   },
+  async beforeCreate(){
+    this.trees = await this.$http.get('https://spreadsheets.google.com/feeds/list/1bFy086G8dGg6tzK4fNyI8I6LKXWuc9gjXlXNXxJDRdY/od6/public/basic?alt=json')
+    .then(response => {
+      return (response.data.feed.entry.map((item) => {
+        let mark = item.content["$t"].replace(/\w+:/g, "").split(',');
+        return [Number(mark[0]), Number(mark[1]), mark[2], mark[3]];
+        // let marker = L.marker([Number(mark[0]), Number(mark[1])]).addTo(self.map).bindPopup("<h1>"+mark[2]+"</h1>"+mark[3]);
+        // return mark;
+      }));
+    });
+    this.treeOptions = await this.trees.map( (tree) => {
+      return tree[3];
+    });
+    console.log(this.treeOptions);
+  },
   data(){
     return {
       tree: "",
       description: "",
       trees: [
         "Amoreira", "Laranjeira"
-      ]
+      ],
+      treeOptions: []
     }
   }
 }

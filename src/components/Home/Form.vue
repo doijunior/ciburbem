@@ -3,7 +3,7 @@
     <v-layout row>
       <v-autocomplete
         v-model="tree"
-        :items="trees"
+        :items="treeOptions"
         :label="'Árvore'"
         prepend-icon="fas fa-search"
       >
@@ -26,6 +26,10 @@
 <script>
 export default {
   name: 'home-form',
+  props: ['treeOptions'],
+  created(){
+    console.log(this.props);
+  },
   data(){
     return {
       tree: "",
@@ -34,17 +38,12 @@ export default {
         "Amoreira", "Laranjeira"
       ]
     }
+  },
+  watch: {
+    treeOptions: function(val){
+      console.log("OI", val)
+      this.treeOptions = val;
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

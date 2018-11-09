@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 
@@ -13,6 +14,7 @@ Vue.use(Vuetify,  {
  iconfont: 'fa'
 });
 
+Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
 
 new Vue({

@@ -1,21 +1,5 @@
-# ciburbem-front
+# Ciburbem Front
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
+## Powered by:
+![Vuetify](https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png)
+![Google Drive](https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Googledrive_logo.svg/304px-Googledrive_logo.svg.png)

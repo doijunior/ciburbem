@@ -1,14 +1,25 @@
 <template>
-  <router-view></router-view>
+  <v-app>
+    <v-toolbar app>Ciburbem Londrina</v-toolbar>
+    <v-content>
+      <v-container fluid>
+          <HomeForm/>
+          <HomeMap/>
+      </v-container>
+    </v-content>
+    <v-footer app></v-footer>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HomeForm from '../components/Home/Form.vue';
+import HomeMap from '../components/Home/Map.vue'
 
 export default {
-  name: 'app',
+  name: 'Home',
   components: {
-    HelloWorld
+    HomeForm,
+    HomeMap
   },
   data(){
     return {

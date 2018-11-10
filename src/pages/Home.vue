@@ -33,7 +33,7 @@ export default {
       }));
     });
     this.treeOptions = await this.trees.map( (tree) => {
-      return tree[3];
+      return tree[2];
     });
     console.log(this.treeOptions);
   },

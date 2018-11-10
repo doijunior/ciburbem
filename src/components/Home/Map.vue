@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <div v-if="marker">
+    {{this.lat}} {{this.lng}}
       <label>Árvore:</label>
       <input type='text' v-model='mainTag'/>
       <label>Descrição complementar:</label>
@@ -41,9 +42,10 @@ export default {
         var myIcon = L.icon({
           iconUrl: './marker-icon-green.png',
           iconSize: [25, 41],
-          iconAnchor: [25, 41],
+          iconAnchor: [13, 41],
         });
         newMarker = L.marker(e.latlng, {icon: myIcon}).addTo(self.map);
+
       self.marker = newMarker;
     });
     axios

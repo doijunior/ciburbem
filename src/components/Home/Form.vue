@@ -30,20 +30,16 @@ export default {
   created(){
     console.log(this.props);
   },
+  created(){
+
+  },
   data(){
     return {
       tree: "",
       description: "",
-      trees: [
-        "Amoreira", "Laranjeira"
-      ]
+      lat: undefined,
+      lng: undefined
     }
   },
-  watch: {
-    treeOptions: function(val){
-      console.log("OI", val)
-      this.treeOptions = val;
-    }
-  }
 }
 </script>

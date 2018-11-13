@@ -3,8 +3,8 @@
     <v-toolbar app>Ciburbem Londrina</v-toolbar>
     <v-content>
       <v-container fluid>
-          <HomeForm :treeOptions="treeOptions"/>
-          <HomeMap/>
+          <HomeForm :treeOptions="treeOptions" @update="filter"/>
+          <HomeMap :trees="trees"/>
           <!-- {{treeIo}} -->
       </v-container>
     </v-content>
@@ -28,14 +28,11 @@ export default {
       return (response.data.feed.entry.map((item) => {
         let mark = item.content["$t"].replace(/\w+:/g, "").split(',');
         return [Number(mark[0]), Number(mark[1]), mark[2], mark[3]];
-        // let marker = L.marker([Number(mark[0]), Number(mark[1])]).addTo(self.map).bindPopup("<h1>"+mark[2]+"</h1>"+mark[3]);
-        // return mark;
       }));
     });
     this.treeOptions = await this.trees.map( (tree) => {
       return tree[2];
     });
-    console.log(this.treeOptions);
   },
   data(){
     return {
@@ -46,17 +43,15 @@ export default {
       ],
       treeOptions: []
     }
+  },
+  methods: {
+    filter(val){
+      console.log("x", val);
+      this.trees = this.trees.map((tree) => {
+        if(tree[2] == val)
+          return tree;
+      })
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

@@ -18,6 +18,7 @@ import L from 'leaflet';
 
 export default {
   name: 'HomeMap',
+  props: ["trees"],
   data () {
     return {
       info: null,
@@ -28,6 +29,7 @@ export default {
     }
   },
   mounted () {
+    console.log("trees", this.trees)
     this.map = L.map('map');
     this.map .setView([-23.31455,-51.17181], 14);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -57,6 +59,11 @@ export default {
           return mark;
         }));
       });
+  },
+  watch: {
+    trees: function(val){
+      console.log("oi", val);
+    }
   },
   computed: {
     lat: {

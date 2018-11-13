@@ -76,6 +76,7 @@ export default {
   methods: {
     teste(){
       console.log("OI");
+      this.$emit('update', this.treeFilter);
     }
   }
 }

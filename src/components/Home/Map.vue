@@ -15,6 +15,7 @@
 <script>
 import axios from 'axios';
 import L from 'leaflet';
+import database from '../../config/database.default.json';
 
 export default {
   name: 'HomeMap',
@@ -31,7 +32,7 @@ export default {
   mounted () {
     console.log("trees", this.trees)
     this.map = L.map('map');
-    this.map .setView([-23.31455,-51.17181], 14);
+    this.map .setView([database.lat,database.lng], database.zoom);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map );
@@ -47,11 +48,11 @@ export default {
           iconAnchor: [13, 41],
         });
         newMarker = L.marker(e.latlng, {icon: myIcon}).addTo(self.map);
-
+        console.log(e)
       self.marker = newMarker;
     });
     axios
-      .get('https://spreadsheets.google.com/feeds/list/1bFy086G8dGg6tzK4fNyI8I6LKXWuc9gjXlXNXxJDRdY/od6/public/basic?alt=json')
+      .get(database.database)
       .then(response => {
         self.points = (response.data.feed.entry.map((item) => {
           let mark = item.content["$t"].replace(/\w+:/g, "").split(',');
@@ -96,6 +97,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
 #map
+  z-index: 1
   width: 100%
   height: 400px
   font-weight: bold

@@ -14,7 +14,8 @@
 
 <script>
 import HomeForm from '../components/Home/Form.vue';
-import HomeMap from '../components/Home/Map.vue'
+import HomeMap from '../components/Home/Map.vue';
+import database from '../config/database.default.json'
 
 export default {
   name: 'Home',
@@ -23,7 +24,7 @@ export default {
     HomeMap
   },
   async beforeCreate(){
-    this.trees = await this.$http.get('https://spreadsheets.google.com/feeds/list/1bFy086G8dGg6tzK4fNyI8I6LKXWuc9gjXlXNXxJDRdY/od6/public/basic?alt=json')
+    this.trees = await this.$http.get(database.database)
     .then(response => {
       return (response.data.feed.entry.map((item) => {
         let mark = item.content["$t"].replace(/\w+:/g, "").split(',');

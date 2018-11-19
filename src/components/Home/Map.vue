@@ -48,7 +48,6 @@ export default {
           iconAnchor: [13, 41],
         });
         newMarker = L.marker(e.latlng, {icon: myIcon}).addTo(self.map);
-        console.log(e)
       self.marker = newMarker;
     });
     axios

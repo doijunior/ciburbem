@@ -15,7 +15,6 @@
 <script>
 import axios from 'axios';
 import L from 'leaflet';
-import database from '../../config/database.default.json';
 
 export default {
   name: 'HomeMap',
@@ -30,9 +29,8 @@ export default {
     }
   },
   mounted () {
-    console.log("trees", this.trees)
     this.map = L.map('map');
-    this.map .setView([database.lat,database.lng], database.zoom);
+    this.map .setView([this.$config.lat,this.$config.lng], this.$config.zoom);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map );
@@ -50,8 +48,7 @@ export default {
         newMarker = L.marker(e.latlng, {icon: myIcon}).addTo(self.map);
       self.marker = newMarker;
     });
-    axios
-      .get(database.database)
+    this.$http.get(this.$config.database)
       .then(response => {
         self.points = (response.data.feed.entry.map((item) => {
           let mark = item.content["$t"].replace(/\w+:/g, "").split(',');

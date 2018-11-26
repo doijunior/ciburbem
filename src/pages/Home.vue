@@ -15,7 +15,6 @@
 <script>
 import HomeForm from '../components/Home/Form.vue';
 import HomeMap from '../components/Home/Map.vue';
-import database from '../config/database.default.json'
 
 export default {
   name: 'Home',
@@ -24,7 +23,7 @@ export default {
     HomeMap
   },
   async beforeCreate(){
-    this.trees = await this.$http.get(database.database)
+    this.trees = await this.$http.get(this.$config.database)
     .then(response => {
       return (response.data.feed.entry.map((item) => {
         let mark = item.content["$t"].replace(/\w+:/g, "").split(',');
@@ -39,19 +38,16 @@ export default {
     return {
       tree: "",
       description: "",
-      trees: [
-        "Amoreira", "Laranjeira"
-      ],
+      trees: [],
       treeOptions: []
     }
   },
   methods: {
     filter(val){
-      console.log("x", val);
       this.trees = this.trees.map((tree) => {
         if(tree[2] == val)
           return tree;
-      })
+      });
     }
   }
 }

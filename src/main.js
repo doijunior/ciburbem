@@ -9,12 +9,14 @@ import store from './store';
 
 import 'vuetify/dist/vuetify.min.css';
 import '@fortawesome/fontawesome-free/css/all.css';
+import config from '../config/default.json';
 
 Vue.use(Vuetify,  {
  iconfont: 'fa'
 });
 
 Vue.prototype.$http = axios;
+Vue.prototype.$config = config;
 Vue.config.productionTip = false;
 
 new Vue({

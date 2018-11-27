@@ -25,12 +25,14 @@ export default {
       mainTag: "",
       description: "",
       marker: undefined,
-      map: undefined
+      map: undefined,
+      layer: undefined
     }
   },
-  mounted () {
+  mounted() {
     this.map = L.map('map');
-    this.map .setView([this.$config.lat,this.$config.lng], this.$config.zoom);
+    this.layer = L.layerGroup().addTo(this.map);
+    this.map.setView([this.$config.lat,this.$config.lng], this.$config.zoom);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map );
@@ -52,14 +54,14 @@ export default {
       .then(response => {
         self.points = (response.data.feed.entry.map((item) => {
           let mark = item.content["$t"].replace(/\w+:/g, "").split(',');
-          let marker = L.marker([Number(mark[0]), Number(mark[1])]).addTo(self.map).bindPopup("<h1>"+mark[2]+"</h1>"+mark[3]);
+          let marker = L.marker([Number(mark[0]), Number(mark[1])]).addTo(this.layer).bindPopup("<h1>"+mark[2]+"</h1>"+mark[3]);
           return mark;
         }));
       });
   },
   watch: {
     trees: function(val){
-      console.log("oi", val);
+      this.updateMap();
     }
   },
   computed: {
@@ -84,6 +86,11 @@ export default {
   },
   methods: {
     save: function(){
+
+    },
+    updateMap: function(){
+      this.layer.clearLayers();
+      console.log("HI", this.trees);
 
     }
   }

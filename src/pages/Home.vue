@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     filter(val){
-      this.trees = this.trees.map((tree) => {
+      this.trees = this.trees.filter((tree) => {
         if(tree[2] == val)
           return tree;
       });

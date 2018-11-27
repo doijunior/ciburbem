@@ -1,19 +1,10 @@
 <template>
   <div class="hello">
-    <div v-if="marker">
-    {{this.lat}} {{this.lng}}
-      <label>Árvore:</label>
-      <input type='text' v-model='mainTag'/>
-      <label>Descrição complementar:</label>
-      <input type='text' v-model='description'/>
-      <button v-on:click='save'>Adicionar</button>
-    </div>
     <div id="map"></div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
 import L from 'leaflet';
 
 export default {
@@ -50,17 +41,10 @@ export default {
         newMarker = L.marker(e.latlng, {icon: myIcon}).addTo(self.map);
       self.marker = newMarker;
     });
-    this.$http.get(this.$config.database)
-      .then(response => {
-        self.points = (response.data.feed.entry.map((item) => {
-          let mark = item.content["$t"].replace(/\w+:/g, "").split(',');
-          let marker = L.marker([Number(mark[0]), Number(mark[1])]).addTo(this.layer).bindPopup("<h1>"+mark[2]+"</h1>"+mark[3]);
-          return mark;
-        }));
-      });
+    this.updateMap();
   },
   watch: {
-    trees: function(val){
+    trees: function(){
       this.updateMap();
     }
   },
@@ -90,8 +74,9 @@ export default {
     },
     updateMap: function(){
       this.layer.clearLayers();
-      console.log("HI", this.trees);
-
+      this.trees.forEach( (tree) => {
+        L.marker([tree[0], tree[1]]).addTo(this.layer).bindPopup("<h1>"+tree[2]+"</h1>"+tree[3]);
+      });
     }
   }
 }
@@ -102,21 +87,10 @@ export default {
 #map
   z-index: 1
   width: 100%
-  height: 400px
+  height: 600px
   font-weight: bold
   font-size: 13px
   text-shadow: 0 0 2px #fff
   .leaflet-shadow-pane > .leaflet-marker-shadow
     display: none
-h3
-  margin: 40px 0 0
-
-ul
-  list-style-type: none
-  padding: 0
-li
-  display: inline-block
-  margin: 0 10px
-a
-  color: #42b983
 </style>

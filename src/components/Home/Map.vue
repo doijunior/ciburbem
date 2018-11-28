@@ -38,6 +38,7 @@ export default {
           iconSize: [25, 41],
           iconAnchor: [13, 41],
         });
+        console.log(e.latlng);  
         newMarker = L.marker(e.latlng, {icon: myIcon}).addTo(self.map);
       self.marker = newMarker;
     });

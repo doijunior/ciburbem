@@ -1,6 +1,6 @@
 # Ciburbem Front
 
-Ciburbem comes from Cibus (latim word for food) and Urbem (latin word for city) and it's a front-end system to map frutiferous tress from a city.
+Ciburbem comes from Cibus (latim word for food) and Urbem (latin word for city) and it's a front-end system to map frutiferous tress from a city. This is a front-end system developed for easy-to-deploy mapping frutiferous trees of a city based on open source and free technologies. 
 
 ## Powered by:
 ![Vuetify](https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png)

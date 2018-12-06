@@ -41,15 +41,7 @@ import L from 'leaflet';
 
 export default {
   name: 'HomeDataAnalytics',
-  props: ["qntTrees", "qntMarkers"],
-  data () {
-    return {
-    }
-  },
-  mounted() {
-  },
-  methods: {
-  }
+  props: ["qntTrees", "qntMarkers"]
 }
 </script>
 

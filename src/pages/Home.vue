@@ -3,10 +3,10 @@
     <v-toolbar app>Ciburbem Londrina</v-toolbar>
     <v-content>
       <v-container fluid>
-        <HomeDataAnalytics :qntTrees="treeOptions.length" :qntMarkers="trees.length"/>
+        <HomeDataAnalytics :qntTrees="species" :qntMarkers="trees.length"/>
         <HomeForm :treeOptions="treeOptions" @update="filter"/>
       </v-container>
-      <HomeMap :trees="trees"/>
+      <HomeMap :trees="treesFiltered"/>
     </v-content>
   </v-app>
 </template>
@@ -31,25 +31,34 @@ export default {
         return [Number(mark[0]), Number(mark[1]), mark[2].trim(), mark[3].trim()];
       }));
     });
-    this.treeOptions = this.trees.map( (tree) => {
-      return tree[2];
-    }).filter( (tree, i, trees) => {
-      if(trees.indexOf(tree) == i){
-        return tree;
-      }
-    });
+    this.treeOptions = [""].concat(
+      this.trees.map( (tree) => {
+        return tree[2];
+      }).filter( (tree, i, trees) => {
+        if(trees.indexOf(tree) == i){
+          return tree;
+        }
+      })
+    );
+    this.treesFiltered = this.trees;
+    this.species = this.treeOptions.length - 1;
   },
   data(){
     return {
       tree: "",
       description: "",
       trees: [],
-      treeOptions: []
+      treeOptions: [],
+      treesFiltered: [],
+      species: 0
     }
   },
   methods: {
     filter(val){
-      this.trees = this.trees.filter((tree) => {
+      this.treesFiltered = this.trees.filter((tree) => {
+        console.log(val)
+        if(val == "")
+          return tree;
         if(tree[2] == val)
           return tree;
       });

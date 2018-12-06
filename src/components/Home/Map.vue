@@ -38,7 +38,7 @@ export default {
           iconSize: [25, 41],
           iconAnchor: [13, 41],
         });
-        console.log(e.latlng);  
+        console.log(e.latlng);
         newMarker = L.marker(e.latlng, {icon: myIcon}).addTo(self.map);
       self.marker = newMarker;
     });
@@ -48,26 +48,6 @@ export default {
     trees: function(){
       this.updateMap();
     }
-  },
-  computed: {
-    lat: {
-      get: function(){
-        if(this.marker)
-          return this.marker.getLatLng().lat;
-        else {
-          return "";
-        }
-      }
-    },
-    lng: {
-      get: function(){
-        if(this.marker)
-          return this.marker.getLatLng().lng;
-        else {
-          return "";
-        }
-      }
-    },
   },
   methods: {
     save: function(){

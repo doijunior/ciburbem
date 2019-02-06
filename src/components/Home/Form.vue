@@ -14,7 +14,7 @@
       </v-slide-x-reverse-transition>
     </v-autocomplete>
 
-      <v-expansion-panel>
+      <!-- <v-expansion-panel>
         <v-expansion-panel-content>
           <div slot="header">Cadastrar Ponto</div>
           <v-card>
@@ -49,7 +49,7 @@
             </v-layout>
           </v-card>
         </v-expansion-panel-content>
-      </v-expansion-panel>
+      </v-expansion-panel> -->
   </v-form>
 </template>
 

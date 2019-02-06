@@ -27,8 +27,10 @@ export default {
     this.trees = await this.$http.get(this.$config.database)
     .then(response => {
       return (response.data.feed.entry.map((item) => {
-        let mark = item.content["$t"].replace(/\w+:/g, "").split(',');
-        return [Number(mark[0]), Number(mark[1]), mark[2].trim(), mark[3].trim()];
+        let content = item.content["$t"];
+        let description = content.substr( content.indexOf("descr:") + 6, content.length);
+        let mark = content.replace(/\w+:/g, "").split(',');
+        return [Number(mark[0]), Number(mark[1]), mark[2].trim(), description.trim()];
       }));
     });
     this.treeOptions = [""].concat(

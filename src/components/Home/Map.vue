@@ -29,6 +29,7 @@ export default {
     }).addTo(this.map );
     var newMarker;
     let self = this;
+    this.map.locate({setView : true});
 
     this.map.on('click', function(e) {
       if(newMarker)

@@ -42,7 +42,7 @@ export default {
         }
       })
     );
-    console.log('Trees',this.treeOptions)
+
     this.treesFiltered = this.trees;
     this.species = this.treeOptions.length - 1;
   },

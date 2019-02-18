@@ -33,7 +33,7 @@ export default {
         return [Number(mark[0]), Number(mark[1]), mark[2].trim(), description.trim()];
       }));
     });
-    this.treeOptions = [""].concat(
+    this.treeOptions = ["Todas"].concat(
       this.trees.map( (tree) => {
         return tree[2];
       }).filter( (tree, i, trees) => {
@@ -42,6 +42,7 @@ export default {
         }
       })
     );
+    console.log('Trees',this.treeOptions)
     this.treesFiltered = this.trees;
     this.species = this.treeOptions.length - 1;
   },
@@ -59,7 +60,7 @@ export default {
     filter(val){
       this.treesFiltered = this.trees.filter((tree) => {
         console.log(val)
-        if(val == "")
+        if(val == "Todas")
           return tree;
         if(tree[2] == val)
           return tree;

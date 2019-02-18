@@ -60,7 +60,7 @@ export default {
   data(){
     return {
       tree: "",
-      treeFilter: "",
+      treeFilter: "Todas",
       description: "",
       lat: undefined,
       lng: undefined,

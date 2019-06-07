@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <% if (process.env.NODE_ENV === 'production') { %>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129917860-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-129917860-1');
+      </script>
+      <meta name="keywords" content="urbanismo, Londrina, frutíferas, árvores, Ciburbem">
+    <% } %>
+    <meta name="Ciburbem Londrina" content="Um mapeamento de árvores frutíferas em vias públicas na cidade de Londrina">
+    <meta name="author" content="Gilson Doi Junior">
+    <meta name="author" content="André Luiz Camargo">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" />
     <title>ciburbem-front</title>
   </head>
